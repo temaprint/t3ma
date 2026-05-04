@@ -1,98 +1,1298 @@
 ---
-import SidebarLayout from '../layouts/SidebarLayout.astro';
+import Layout from '../layouts/Layout.astro';
+import siteData from '../data/site.json';
 
+const { profile } = siteData;
 const posts = await Astro.glob('./posts/*.md');
 const projects = await Astro.glob('./projects/*.md');
+
+const sortedPosts = posts.sort((a, b) =>
+  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+);
 ---
 
-<SidebarLayout title="t3ma - SEO and DEV ">
-  <section class="about">
-    <h2><span class="icon">👤</span> About me</h2>
-    <p>SEO is what I love. If you think that SEO is only about title, description and Semantic Core, then unfortunately not, this is just the tip of the iceberg.</p>
-  </section>
-
-  <section class="posts">
-    <h2><span class="icon">📡</span> Themes  </h2>
-    {posts.map((post) => (
-      <div class="post-item">
-        <a href={post.url} class="post-title">{post.frontmatter.title}</a>
-        <p class="post-description">{post.frontmatter.description}</p>
-      </div>
-    ))}
-  </section>
-
-  <section class="projects">
-    <h2><span class="icon">📁</span> Projects</h2>
-    {projects.map((project) => (
-      <div class="project-item">
-        <a href={project.url} class="project-title">{project.frontmatter.title}</a>
-        <p class="project-description">{project.frontmatter.description}</p>
-      </div>
-    ))}
-  </section>
-
-  <section class="experience">
-    <h2><span class="icon">💼</span> Work Experience</h2>
-    <div class="experience-item">
-      <div class="experience-header">
-        <span class="date">2020 - present</span>
-        <h3>Icons8.com - SEO</h3>
-      </div>
-      <div class="experience-header">
-        <span class="date">2010 - 2020</span>
-        <h3>Citysakh.ru - CEO</h3>
-      </div>
+<Layout title="t3ma — I build things on the internet">
+  <!-- Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span>SHIPPING PRODUCTS FROM THAILAND 🌴</span>
+      <span>NO VC MONEY. NO BS. JUST CODE. ⚡</span>
+      <span>BUILDING IN PUBLIC SINCE 2010 📡</span>
+      <span>LOOKING FOR CO-FOUNDERS & PARTNERS 🤝</span>
+      <span>MY SERVERS NEVER SLEEP 🖥️</span>
+      <span>SHIPPING PRODUCTS FROM THAILAND 🌴</span>
+      <span>NO VC MONEY. NO BS. JUST CODE. ⚡</span>
+      <span>BUILDING IN PUBLIC SINCE 2010 📡</span>
+      <span>LOOKING FOR CO-FOUNDERS & PARTNERS 🤝</span>
+      <span>MY SERVERS NEVER SLEEP 🖥️</span>
     </div>
+  </div>
 
-  </section>
-</SidebarLayout>
+  <div class="page">
+    <!-- Nav -->
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="/" class="nav-name">
+          <span class="glitch" data-text="t3ma">t3ma</span><span class="blink">_</span>
+        </a>
+        <div class="nav-right">
+          <span class="badge">v2026.05</span>
+          <div class="nav-status">
+            <span class="dot"></span>
+            <span>ready to build</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-photo-wrap">
+        <img src={profile.avatar} alt="t3ma" class="avatar" />
+        <span class="avatar-badge">INDIE</span>
+      </div>
+      <div class="hero-body">
+        <div class="hero-tagline">&gt; whoami</div>
+        <h1 class="hero-title">
+          I build things<br/>
+          <span class="gradient-text">on the internet.</span>
+        </h1>
+        <p class="hero-desc">
+          Websites, apps, bots, tools — whatever a project needs to
+          exist and actually work. Not another "MVP" that dies in 2 weeks.
+        </p>
+        <div class="hero-actions">
+          <a href="https://t.me/t_3_m_a" class="btn btn-neon">
+            <span class="btn-icon">⚡</span> let's talk
+          </a>
+          <a href="#projects" class="btn btn-ghost">see the builds ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento Grid -->
+    <section class="bento">
+      <div class="bento-card bento-about">
+        <span class="card-label">README.md</span>
+        <p>I like projects that start small and <strong>grow into something real</strong>. I can handle the whole technical side — dev, servers, deploy, SEO, scaling, automation. Basically I'm the person you call when you need <em>actually shipped</em>, not just "we'll figure it out later".</p>
+        <p>Some projects were small. Some worked <em>really</em> well. Some crashed and burned. That's the game, baby.</p>
+      </div>
+      <div class="bento-card bento-vibe">
+        <span class="card-label">vibe check</span>
+        <div class="vibe-meter">
+          <span class="vibe-fill"></span>
+        </div>
+        <span class="vibe-label">CHAOSENGINE: 97%</span>
+      </div>
+      <div class="bento-card bento-stack">
+        <span class="card-label">stack.json</span>
+        <div class="tags">
+          <span class="tag">Astro</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">React</span>
+          <span class="tag">Tailwind</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Docker</span>
+          <span class="tag">SEO</span>
+          <span class="tag">Bots</span>
+          <span class="tag">APIs</span>
+          <span class="tag">AI/ML</span>
+          <span class="tag">Crypto</span>
+        </div>
+      </div>
+      <div class="bento-card bento-location">
+        <span class="card-label">geo:latlng</span>
+        <div class="loc-content">
+          <span class="loc-flag">🇹🇭</span>
+          <span>Thailand</span>
+        </div>
+      </div>
+      <div class="bento-card bento-launches">
+        <span class="card-label">shipped.count()</span>
+        <span class="launch-num">{sortedPosts.length + projects.length}</span>
+        <span class="launch-sub">things deployed to prod</span>
+      </div>
+      <div class="bento-card bento-coffee">
+        <span class="card-label">fuel</span>
+        <span class="coffee-icon">☕</span>
+        <span class="coffee-sub">powered by caffeine & spite</span>
+      </div>
+    </section>
+
+    <!-- What I build -->
+    <section class="section">
+      <h2 class="section-heading">
+        <span class="hash">#</span> stuff I actually enjoy building
+      </h2>
+      <div class="build-grid">
+        <div class="build-item">
+          <span class="build-icon">⚡</span>
+          <div>
+            <h3>Web Tools</h3>
+            <p>Solve real problems, not imaginary ones</p>
+          </div>
+        </div>
+        <div class="build-item">
+          <span class="build-icon">✈️</span>
+          <div>
+            <h3>Telegram Bots</h3>
+            <p>Bots that do stuff while you sleep</p>
+          </div>
+        </div>
+        <div class="build-item">
+          <span class="build-icon">📈</span>
+          <div>
+            <h3>SEO Projects</h3>
+            <p>Traffic machines that print money</p>
+          </div>
+        </div>
+        <div class="build-item">
+          <span class="build-icon">🤖</span>
+          <div>
+            <h3>AI Tools</h3>
+            <p>Because it's 2026, everyone has AI</p>
+          </div>
+        </div>
+        <div class="build-item">
+          <span class="build-icon">₿</span>
+          <div>
+            <h3>Crypto Tools</h3>
+            <p>Web3 stuff that actually makes sense</p>
+          </div>
+        </div>
+        <div class="build-item">
+          <span class="build-icon">🎯</span>
+          <div>
+            <h3>Niche Services</h3>
+            <p>Small market, big margins</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="section">
+      <h2 class="section-heading">
+        <span class="hash">#</span> shipped to production
+        <span class="heading-tag">[{sortedPosts.length + projects.length} entries]</span>
+      </h2>
+      <div class="project-list">
+        {sortedPosts.map((post) => (
+          <a href={post.url} class="project-card">
+            <div class="project-top">
+              <h3>{post.frontmatter.title}</h3>
+              <span class="project-go">→</span>
+            </div>
+            <p class="project-desc">{post.frontmatter.description}</p>
+            <div class="project-meta">
+              <span class="meta-tag">article</span>
+              <span class="project-date">
+                {new Date(post.frontmatter.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+              </span>
+            </div>
+          </a>
+        ))}
+        {projects.map((project) => (
+          <a href={project.url} class="project-card">
+            <div class="project-top">
+              <h3>{project.frontmatter.title}</h3>
+              <span class="project-go">→</span>
+            </div>
+            <p class="project-desc">{project.frontmatter.description}</p>
+            <div class="project-meta">
+              <span class="meta-tag meta-project">project</span>
+              <span class="project-date">
+                {new Date(project.frontmatter.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section">
+      <h2 class="section-heading">
+        <span class="hash">#</span> career.log
+      </h2>
+      <div class="timeline">
+        <div class="tl-item tl-active">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-head">
+              <h3>Founder — building web projects</h3>
+              <span class="tl-date">2025 — now</span>
+            </div>
+            <p class="tl-sub">
+              I build and launch web projects using Astro and modern tools.
+              Fast sites, APIs, bots and infrastructure.
+              Open to partnerships and co-founder roles.
+              Currently accepting interesting problems.
+            </p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-head">
+              <h3>SEO — Icons8.com</h3>
+              <span class="tl-date">2020 — 2025</span>
+            </div>
+            <p class="tl-sub">Scaled organic traffic. Optimized everything. Shipped results.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-body">
+            <div class="tl-head">
+              <h3>CEO & Founder — Citysakh.ru</h3>
+              <span class="tl-date">2010 — 2020</span>
+            </div>
+            <p class="tl-sub">Ran a city portal for 10 years. Learned everything the hard way.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How I work -->
+    <section class="section">
+      <h2 class="section-heading">
+        <span class="hash">#</span> partnership.rules()
+      </h2>
+      <div class="work-grid">
+        <div class="work-card">
+          <h3>I want real partnerships 💪</h3>
+          <ul class="work-list">
+            <li><span class="x">→</span> Revenue share — we both eat</li>
+            <li><span class="x">→</span> Equity — skin in the game</li>
+            <li><span class="x">→</span> Long-term — no hit & run</li>
+          </ul>
+        </div>
+        <div class="work-card">
+          <h3>What you get 🎁</h3>
+          <ul class="work-list">
+            <li><span class="x">→</span> Zero corporate bureaucracy</li>
+            <li><span class="x">→</span> Ship fast, iterate faster</li>
+            <li><span class="x">→</span> Full infra: servers, deploy, scale</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Terminal CTA -->
+    <section class="section cta">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="terminal-dot r"></span>
+          <span class="terminal-dot y"></span>
+          <span class="terminal-dot g"></span>
+          <span class="terminal-title">t3ma@server:~</span>
+        </div>
+        <div class="terminal-body">
+          <p class="terminal-line">
+            <span class="prompt">$</span> got-idea --partner t3ma
+          </p>
+          <p class="terminal-line output">
+            → Got an idea or project? Let's make it real.<br/>
+            → I have servers, infrastructure and experience.<br/>
+            → No pitch decks needed. Just message me.
+          </p>
+          <p class="terminal-line">
+            <span class="prompt">$</span> <a href="https://t.me/t_3_m_a" class="terminal-link">open telegram <span class="blink-cursor">█</span></a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-links">
+          {profile.socials.map((social) => (
+            <a href={social.url} target="_blank" rel="noopener noreferrer" class="footer-link">{social.name}</a>
+          ))}
+        </div>
+        <div class="footer-right">
+          <span class="footer-made">built with ☕ and <span class="gradient-text-mini">spite</span></span>
+          <span class="footer-copy">&copy; {new Date().getFullYear()} t3ma</span>
+          <a href="/signal" class="easter-egg" aria-label="signal" title="signal">█</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</Layout>
 
 <style>
-  section {
-    margin: 2rem 0;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+  /* ═══ TICKER ═══ */
+  .ticker-wrap {
+    overflow: hidden;
+    background: var(--accent);
+    color: #000;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 0.35rem 0;
   }
 
-  .post-item, .project-item, .experience-item {
-    margin: 1.5rem 0;
+  .ticker {
+    display: flex;
+    gap: 2.5rem;
+    animation: scroll 30s linear infinite;
+    white-space: nowrap;
+    width: max-content;
   }
 
-  .post-title, .project-title {
-    font-size: 1.2rem;
-    color: #fff;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 0.5rem;
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 
-  .post-date, .project-date {
-    font-size: 0.8rem;
-    color: #666;
+  /* ═══ PAGE ═══ */
+  .page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
 
-  .experience-header {
+  /* ═══ NAV ═══ */
+  .nav {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
   }
 
-  .date {
-    color: #666;
+  .nav-name {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent-light);
+    text-decoration: none;
+  }
+
+  .nav-name:hover {
+    color: var(--accent-light);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .badge {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-status {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .blink {
+    animation: blink 1s step-end infinite;
+    color: var(--accent);
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  /* Glitch */
+  .glitch {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  .glitch:hover::before {
+    animation: glitch1 0.3s linear;
+    color: #ff00ff;
+    opacity: 0.8;
+  }
+
+  .glitch:hover::after {
+    animation: glitch2 0.3s linear;
+    color: #00ffff;
+    opacity: 0.8;
+  }
+
+  @keyframes glitch1 {
+    0% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 1px); }
+    25% { clip-path: inset(50% 0 10% 0); transform: translate(2px, -1px); }
+    50% { clip-path: inset(10% 0 70% 0); transform: translate(-1px, 2px); }
+    75% { clip-path: inset(40% 0 30% 0); transform: translate(1px, -2px); }
+    100% { clip-path: inset(80% 0 0 0); transform: translate(0); }
+  }
+
+  @keyframes glitch2 {
+    0% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
+    25% { clip-path: inset(10% 0 60% 0); transform: translate(-2px, 1px); }
+    50% { clip-path: inset(70% 0 5% 0); transform: translate(1px, -2px); }
+    75% { clip-path: inset(30% 0 40% 0); transform: translate(-1px, 2px); }
+    100% { clip-path: inset(0 0 80% 0); transform: translate(0); }
+  }
+
+  /* ═══ HERO ═══ */
+  .hero {
+    display: flex;
+    gap: 2rem;
+    padding: 3rem 0 2.5rem;
+  }
+
+  .hero-photo-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .avatar:hover {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.5), 0 0 60px rgba(139, 92, 246, 0.2);
+  }
+
+  .avatar-badge {
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    background: var(--green);
+    color: #000;
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    font-weight: 700;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+    box-shadow: 0 0 10px var(--green);
+  }
+
+  .hero-tagline {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--green);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 0.6rem;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4, #22c55e);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .hero-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    max-width: 420px;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  /* ═══ BUTTONS ═══ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    letter-spacing: 0.01em;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .btn-neon {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+  }
+
+  .btn-neon:hover {
+    background: #7c3aed;
+    color: #fff;
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
+    transform: translateY(-1px);
+  }
+
+  .btn-icon {
     font-size: 0.9rem;
   }
 
-  h2 {
-    font-size: 1.5rem;
-    margin: 2rem 0 1rem;
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+
+  .btn-ghost:hover {
+    color: var(--text);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* ═══ BENTO ═══ */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .bento-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bento-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .bento-card:hover::before {
+    opacity: 1;
+  }
+
+  .bento-card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .card-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--accent);
+    text-transform: lowercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.7rem;
+    opacity: 0.7;
+  }
+
+  .bento-about {
+    grid-column: span 3;
+  }
+
+  .bento-about p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+  }
+
+  .bento-about strong {
+    color: var(--text);
+  }
+
+  .bento-about em {
+    color: var(--accent-light);
+    font-style: normal;
+  }
+
+  .bento-about p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Vibe check */
+  .bento-vibe {
+    grid-column: span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .vibe-meter {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+
+  .vibe-fill {
+    display: block;
+    width: 97%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--green), var(--cyan));
+    border-radius: 3px;
+    animation: vibe-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes vibe-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .vibe-label {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    color: var(--green);
+    letter-spacing: 0.08em;
+  }
+
+  /* Stack */
+  .bento-stack {
+    grid-column: span 3;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .tag {
+    padding: 0.25rem 0.55rem;
+    background: rgba(139, 92, 246, 0.08);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    border-radius: 5px;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--accent-light);
+    transition: all 0.15s ease;
+    cursor: default;
+  }
+
+  .tag:hover {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* Location */
+  .bento-location {
+    grid-column: span 1;
+  }
+
+  .loc-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    text-align: center;
+  }
+
+  .loc-flag {
+    font-size: 1.8rem;
+  }
+
+  .loc-content span:last-child {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+  }
+
+  /* Launches */
+  .bento-launches {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .launch-num {
+    font-family: var(--mono);
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--green), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .launch-sub {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+    letter-spacing: 0.03em;
+  }
+
+  /* Coffee */
+  .bento-coffee {
+    grid-column: span 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .coffee-icon {
+    font-size: 1.8rem;
+    display: block;
+    animation: wiggle 3s ease-in-out infinite;
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+  }
+
+  .coffee-sub {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+  }
+
+  /* ═══ SECTIONS ═══ */
+  .section {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-heading {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
+    gap: 0.3rem;
+  }
+
+  .hash {
+    color: var(--accent);
+  }
+
+  .heading-tag {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    opacity: 0.6;
+    margin-left: 0.25rem;
+  }
+
+  /* ═══ BUILD GRID ═══ */
+  .build-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+  }
+
+  .build-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.9rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    cursor: default;
+  }
+
+  .build-item:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-accent);
+    transform: translateX(2px);
+  }
+
+  .build-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .build-item h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.1rem;
+  }
+
+  .build-item p {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* ═══ PROJECTS ═══ */
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .project-card {
+    display: block;
+    padding: 1rem 1.15rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .project-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-accent);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.08);
+  }
+
+  .project-card:hover .project-go {
+    transform: translateX(4px);
+    color: var(--accent);
+  }
+
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+  }
+
+  .project-top h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .project-go {
+    font-family: var(--mono);
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+  }
+
+  .project-desc {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .meta-tag {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    color: var(--accent-light);
+    background: rgba(139, 92, 246, 0.1);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  .meta-project {
+    color: var(--green);
+    background: var(--green-dim);
+  }
+
+  .project-date {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+  }
+
+  /* ═══ TIMELINE ═══ */
+  .timeline {
+    padding-left: 1rem;
+    border-left: 2px solid var(--border);
+    margin-left: 0.25rem;
+  }
+
+  .tl-item {
+    position: relative;
+    padding: 0 0 2rem 1.25rem;
+  }
+
+  .tl-item:last-child {
+    padding-bottom: 0;
+  }
+
+  .tl-dot {
+    position: absolute;
+    left: -6px;
+    top: 7px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--text-muted);
+  }
+
+  .tl-active .tl-dot {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+    animation: dot-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes dot-glow {
+    0%, 100% { box-shadow: 0 0 12px rgba(139, 92, 246, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.8); }
+  }
+
+  .tl-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .tl-head h3 {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .tl-date {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .tl-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ═══ WORK ═══ */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
   }
 
-  .icon {
-    font-size: 1.2rem;
+  .work-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.3rem;
+    transition: border-color 0.2s;
+  }
+
+  .work-card:hover {
+    border-color: var(--border-accent);
+  }
+
+  .work-card h3 {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.9rem;
+  }
+
+  .work-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .work-list li {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .x {
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+  }
+
+  /* ═══ TERMINAL CTA ═══ */
+  .cta {
+    border-bottom: none;
+  }
+
+  .terminal {
+    background: #0c0c0c;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.1);
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .terminal-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .terminal-dot.r { background: #ff5f57; }
+  .terminal-dot.y { background: #febc2e; }
+  .terminal-dot.g { background: #28c840; }
+
+  .terminal-title {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    margin-left: 0.4rem;
+  }
+
+  .terminal-body {
+    padding: 1.2rem;
+  }
+
+  .terminal-line {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .prompt {
+    color: var(--green);
+    margin-right: 0.5rem;
+  }
+
+  .output {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+  }
+
+  .terminal-link {
+    color: var(--accent-light);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .terminal-link:hover {
+    color: var(--accent);
+  }
+
+  .blink-cursor {
+    animation: blink 1s step-end infinite;
+    color: var(--accent);
+  }
+
+  /* ═══ FOOTER ═══ */
+  .footer {
+    padding: 1.5rem 0 2.5rem;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .footer-link {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    transition: color 0.15s;
+  }
+
+  .footer-link:hover {
+    color: var(--accent-light);
+  }
+
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.15rem;
+  }
+
+  .footer-made {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+  }
+
+  .gradient-text-mini {
+    background: linear-gradient(135deg, var(--accent), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+
+  .easter-egg {
+    font-size: 0.5rem;
+    color: var(--bg);
+    text-decoration: none;
+    cursor: default;
+    transition: color 0.3s;
+  }
+
+  .easter-egg:hover {
+    color: var(--accent);
+  }
+
+  /* ═══ MOBILE ═══ */
+  @media (max-width: 640px) {
+    .hero {
+      flex-direction: column;
+      gap: 1.25rem;
+      padding: 2rem 0;
+    }
+
+    .hero-title {
+      font-size: 1.75rem;
+    }
+
+    .bento {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .bento-about {
+      grid-column: span 2;
+    }
+
+    .bento-stack {
+      grid-column: span 2;
+    }
+
+    .bento-launches {
+      grid-column: span 1;
+    }
+
+    .build-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tl-head {
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .footer-inner {
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .footer-right {
+      align-items: flex-start;
+    }
+
+    .section {
+      padding: 2rem 0;
+    }
+
+    .nav-right {
+      display: none;
+    }
+
+    .ticker {
+      animation-duration: 20s;
+    }
   }
 </style>

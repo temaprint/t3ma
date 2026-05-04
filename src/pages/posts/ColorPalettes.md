@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPost.astro
 title: Color Palettes
 date: 2024-03-26
-description: Template for Astro - Color Palettes
+description: Color Palettes — an Astro and React template for browsing and discovering beautiful color combinations. Tailwind CSS, smart filtering, and fast static performance.
 ---
 
 # How I Created a Template for Astro: Color Palettes

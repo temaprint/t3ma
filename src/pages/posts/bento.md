@@ -2,20 +2,20 @@
 layout: ../../layouts/BlogPost.astro
 title: Bento Style for Astro
 date: 2024-03-20
-description: A Modern Aesthetic Template
+description: Bento Style for Astro — a modern, modular design template with card-based layout. Fast performance, responsive grid, and built with Astro for portfolios and landing pages.
 ---
 
 # Bento Style for Astro: A Modern Aesthetic Template
 Link: [bento.temaprint.com](https://bento.temaprint.com/)
 A modern and aesthetic design template inspired by the Bento UI style. Built with Astro and optimized for performance and visual appeal.
 
-![Image](https://raw.githubusercontent.com/temaprint/bento/main/public/bento.jpg)
-![Image](https://raw.githubusercontent.com/temaprint/bento/main/public/bento0.jpg)
+![Bento Style template homepage preview](https://raw.githubusercontent.com/temaprint/bento/main/public/bento.jpg)
+![Bento Style template card grid layout](https://raw.githubusercontent.com/temaprint/bento/main/public/bento0.jpg)
 ## Introduction
 
 **Bento Style for Astro** is a sleek and modern design template inspired by the **Bento UI style**. Built with **Astro**, this template is optimized for performance and visual appeal, providing a clean and structured layout for web projects.
 
-🔗 **[Live Demo](https://bento.temapint.com)**
+🔗 **[Live Demo](https://bento.temaprint.com/)**
 
 ## Why Bento Style?
 

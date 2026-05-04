@@ -1,45 +1,465 @@
 ---
-import SidebarLayout from './SidebarLayout.astro';
+import Layout from './Layout.astro';
 
 const { frontmatter } = Astro.props;
+
+const isProject = Astro.url.pathname.startsWith('/projects/');
+const typeLabel = isProject ? 'project' : 'article';
+const typeClass = isProject ? 'type-project' : 'type-article';
+const siteURL = 'https://temaprint.com';
+const articleURL = new URL(Astro.url.pathname, siteURL).href;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": frontmatter.title,
+  "description": frontmatter.description,
+  "datePublished": frontmatter.date ? new Date(frontmatter.date).toISOString() : undefined,
+  "author": {
+    "@type": "Person",
+    "name": "t3ma",
+    "url": siteURL
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "t3ma",
+    "url": siteURL
+  },
+  "url": articleURL,
+  "mainEntityOfPage": articleURL
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": siteURL
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": frontmatter.title,
+      "item": articleURL
+    }
+  ]
+};
 ---
 
-<SidebarLayout title={frontmatter.title}>
-  <article class="post">
-    <h1>{frontmatter.title}</h1>
-    <div class="content">
+<Layout
+  title={`${frontmatter.title} — t3ma`}
+  description={frontmatter.description}
+  type="article"
+  publishedDate={frontmatter.date ? new Date(frontmatter.date).toISOString() : undefined}
+>
+  <div class="page">
+    <!-- Nav -->
+    <nav class="nav" aria-label="Breadcrumb">
+      <div class="nav-inner">
+        <a href="/" class="nav-back" aria-label="Back to homepage">
+          <span class="back-arrow">←</span>
+          <span class="nav-name">
+            <span class="glitch" data-text="t3ma">t3ma</span><span class="blink">_</span>
+          </span>
+        </a>
+        <span class={`type-badge ${typeClass}`}>{typeLabel}</span>
+      </div>
+    </nav>
+
+    <!-- Post header -->
+    <header class="post-header">
+      <div class="post-meta">
+        <span class={`type-tag ${typeClass}`}>{typeLabel}</span>
+        {frontmatter.date && (
+          <time class="post-date" datetime={new Date(frontmatter.date).toISOString().split('T')[0]}>
+            {new Date(frontmatter.date).toLocaleDateString('en-US', {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric'
+            })}
+          </time>
+        )}
+      </div>
+      <h1 class="post-title">{frontmatter.title}</h1>
+      {frontmatter.description && (
+        <p class="post-desc">{frontmatter.description}</p>
+      )}
+    </header>
+
+    <!-- Content -->
+    <article class="post-content">
       <slot />
+    </article>
+
+    <!-- Back link -->
+    <div class="post-footer">
+      <div class="terminal-mini">
+        <span class="prompt">$</span>
+        <a href="/" class="back-link">cd ~/</a>
+        <span class="cursor blink-cursor">█</span>
+      </div>
     </div>
-  </article>
-</SidebarLayout>
+  </div>
+
+  <!-- JSON-LD: Article -->
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+</Layout>
 
 <style>
-  .post {
-    margin: 4rem 0;
+  .page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
 
-  h1 {
-    font-size: 2.5rem;
+  /* Nav */
+  .nav {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-back {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .nav-back:hover {
+    opacity: 0.8;
+  }
+
+  .back-arrow {
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+
+  .nav-name {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--accent-light);
+  }
+
+  .blink {
+    animation: blink 1s step-end infinite;
+    color: var(--accent);
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .glitch {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  .glitch:hover::before {
+    animation: glitch1 0.3s linear;
+    color: #ff00ff;
+    opacity: 0.8;
+  }
+
+  .glitch:hover::after {
+    animation: glitch2 0.3s linear;
+    color: #00ffff;
+    opacity: 0.8;
+  }
+
+  @keyframes glitch1 {
+    0% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 1px); }
+    25% { clip-path: inset(50% 0 10% 0); transform: translate(2px, -1px); }
+    50% { clip-path: inset(10% 0 70% 0); transform: translate(-1px, 2px); }
+    75% { clip-path: inset(40% 0 30% 0); transform: translate(1px, -2px); }
+    100% { clip-path: inset(80% 0 0 0); transform: translate(0); }
+  }
+
+  @keyframes glitch2 {
+    0% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
+    25% { clip-path: inset(10% 0 60% 0); transform: translate(-2px, 1px); }
+    50% { clip-path: inset(70% 0 5% 0); transform: translate(1px, -2px); }
+    75% { clip-path: inset(30% 0 40% 0); transform: translate(-1px, 2px); }
+    100% { clip-path: inset(0 0 80% 0); transform: translate(0); }
+  }
+
+  .type-badge {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .type-article {
+    color: var(--accent-light);
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+
+  .type-project {
+    color: var(--green);
+    background: var(--green-dim);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+  }
+
+  /* Header */
+  .post-header {
+    padding: 2.5rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .type-tag {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .post-date {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+  }
+
+  .post-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
     margin-bottom: 0.5rem;
   }
 
-  .content {
-    margin-top: 2rem;
+  .post-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
   }
 
-  .content :global(h2) {
-    font-size: 1.8rem;
-    margin: 2rem 0 1rem;
+  /* Content */
+  .post-content {
+    padding: 2rem 0;
   }
 
-  .content :global(p) {
+  .post-content :global(h1) {
+    display: none;
+  }
+
+  .post-content :global(h2) {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 2.5rem 0 0.75rem;
+    letter-spacing: -0.02em;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .post-content :global(h3) {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 2rem 0 0.5rem;
+  }
+
+  .post-content :global(p) {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin: 0.75rem 0;
+  }
+
+  .post-content :global(a) {
+    color: var(--accent-light);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+    transition: all 0.15s ease;
+  }
+
+  .post-content :global(a:hover) {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    padding-left: 1.25rem;
+    margin: 0.75rem 0;
+  }
+
+  .post-content :global(li) {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0.3rem 0;
+  }
+
+  .post-content :global(strong) {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .post-content :global(em) {
+    color: var(--accent-light);
+    font-style: normal;
+  }
+
+  .post-content :global(code) {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    background: rgba(139, 92, 246, 0.08);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    color: var(--accent-light);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .post-content :global(pre) {
+    background: #0c0c0c;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin: 1.25rem 0;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .post-content :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    margin: 1.25rem 0;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .post-content :global(hr) {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  .post-content :global(img) {
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
     margin: 1rem 0;
   }
 
-  .content :global(pre) {
-    background: #111;
-    padding: 1rem;
-    border-radius: 4px;
-    overflow-x: auto;
+  .post-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+  }
+
+  .post-content :global(th),
+  .post-content :global(td) {
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .post-content :global(th) {
+    background: var(--bg-card);
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .post-content :global(td) {
+    color: var(--text-secondary);
+  }
+
+  /* Footer */
+  .post-footer {
+    padding: 2rem 0 3rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .terminal-mini {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+  }
+
+  .prompt {
+    color: var(--green);
+  }
+
+  .back-link {
+    color: var(--accent-light);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .cursor {
+    color: var(--accent);
+  }
+
+  .blink-cursor {
+    animation: blink 1s step-end infinite;
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .post-title {
+      font-size: 1.5rem;
+    }
+
+    .post-header {
+      padding: 2rem 0 1.5rem;
+    }
+
+    .post-content {
+      padding: 1.5rem 0;
+    }
   }
 </style>

@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPost.astro
 title: blog.icons8.com technical optimization
 date: 2024-12-29
-description: A comprehensive technical SEO optimization project for the Icons8 blog platform
+description: Technical SEO optimization for the Icons8 blog — improved Core Web Vitals, lazy loading, structured data, and internal linking. 40% faster load time, 30% more organic traffic.
 ---
 
 ## Project Overview

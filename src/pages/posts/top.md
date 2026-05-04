@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPost.astro
 title: topaitool.dev
 date: 2024-01-01
-description: A Curated AI Tools Directory
+description: topaitool.dev — a curated directory of the best AI-powered tools for creators and developers. Built with Astro, Tailwind CSS, and TypeScript for fast performance.
 ---
 
 # Building topaitool.dev: A Curated AI Tools Directory
@@ -11,7 +11,7 @@ Explore the best AI-powered tools for creators and developers
 Link: https://topaitool.dev/
 Git: git clone https://github.com/temaprint/topaitool.dev.git
 
-![Image](https://raw.githubusercontent.com/temaprint/topaitool.dev/main/public/topaitool.png)
+![topaitool.dev — AI tools directory homepage with search and categories](https://raw.githubusercontent.com/temaprint/topaitool.dev/main/public/topaitool.png)
 
 
 

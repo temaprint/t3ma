@@ -12,31 +12,25 @@ const { profile } = siteData;
 
 <Layout title={title}>
   <main class="layout">
-    <!-- Left Column -->
     <div class="left-column">
       <section class="profile-section">
         <a href="/" class="logo-link">
-          <img src={profile.avatar} alt="Profile" class="avatar" />
+          <img src={profile.avatar} alt="Artem" class="avatar" />
           <h1 class="logo">{profile.name}</h1>
         </a>
-        
-        <div class="bio">
-          {profile.bio.map((item) => (
-            <p><span class="icon">{item.icon}</span> {item.text}</p>
-          ))}
-        </div>
+
+        <p class="tagline">{profile.tagline}</p>
 
         <div class="social-links">
           {profile.socials.map((social) => (
-            <a href={social.url} class="social-link">
-              <span class="icon">{social.icon}</span> {social.name}
+            <a href={social.url} class="social-link" target="_blank" rel="noopener noreferrer">
+              {social.name}
             </a>
           ))}
         </div>
       </section>
     </div>
 
-    <!-- Right Column -->
     <div class="right-column">
       <slot />
     </div>
@@ -46,11 +40,11 @@ const { profile } = siteData;
 <style>
   .layout {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 260px 1fr;
     gap: 2rem;
-    max-width: calc(100vw - 60px);
+    max-width: 900px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 2rem 1.5rem;
   }
 
   .left-column {
@@ -64,9 +58,7 @@ const { profile } = siteData;
   }
 
   .profile-section {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    padding: 2rem;
+    padding: 1.5rem;
   }
 
   .logo-link {
@@ -74,7 +66,7 @@ const { profile } = siteData;
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     transition: opacity 0.2s;
   }
 
@@ -84,51 +76,49 @@ const { profile } = siteData;
   }
 
   .avatar {
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+    object-fit: cover;
+    border: 2px solid var(--border);
   }
 
   .logo {
-    font-size: 2.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
     margin: 0;
     color: #fff;
+    letter-spacing: -0.01em;
   }
 
-  .bio {
-    color: #888;
-    font-size: 0.9rem;
-    margin-bottom: 2rem;
+  .tagline {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
     text-align: center;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
   }
 
   .social-links {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
   }
 
   .social-link {
-    color: #fff;
+    color: var(--text-secondary);
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem;
-    border-radius: 4px;
-    transition: background-color 0.2s;
+    font-size: 0.8rem;
+    padding: 0.35rem 0;
+    transition: color 0.2s;
   }
 
   .social-link:hover {
-    background: rgba(255, 255, 255, 0.1);
+    color: var(--text);
     text-decoration: none;
-  }
-
-  .icon {
-    font-size: 1.2rem;
   }
 
   @media (max-width: 768px) {

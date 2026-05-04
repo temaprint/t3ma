@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPost.astro
 title: Freaky Font
 date: 2024-03-28
-description: Freaky Font - A Bold Typeface for Designers & Developers
+description: Freaky Font — a bold typeface inspired by Math Bold Script, now available as TTF and SVG for designers and developers. Free, open source, MIT licensed.
 ---
 
 # Freaky Font: A Bold Typeface for Designers & Developers

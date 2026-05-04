@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPost.astro
 title: Low Power Blog
 date: 2024-03-26
-description: How I Created a Theme Low Power for Astro
+description: Low Power Blog — a minimalist Astro theme focused on energy efficiency and low-power computing. Monochrome design, fast loading, tag system, and grayscale images.
 ---
 
 # How I Created a Theme for Astro: Low Power Blog
@@ -12,11 +12,11 @@ A minimalist blog template focused on energy efficiency and low-power computing.
 
 https://github.com/temaprint/eco
 
-![Low Power](https://github.com/temaprint/eco/raw/main/public/LowPower.png)
+![Low Power Blog theme — homepage with minimalist monochrome design](https://github.com/temaprint/eco/raw/main/public/LowPower.png)
 
-![Low Power](https://github.com/temaprint/eco/raw/main/public/LowPower3.png)
+![Low Power Blog theme — responsive grid layout on mobile](https://github.com/temaprint/eco/raw/main/public/LowPower3.png)
 
-![Low Power](https://github.com/temaprint/eco/raw/main/public/LowPower2.png)
+![Low Power Blog theme — blog post view with optimized images](https://github.com/temaprint/eco/raw/main/public/LowPower2.png)
 
 ## Introduction
 

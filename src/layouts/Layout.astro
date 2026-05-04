@@ -3,24 +3,92 @@ import '../styles/global.css';
 
 interface Props {
   title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedDate?: string;
+  canonicalURL?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = 't3ma — indie developer building web projects with Astro. Websites, apps, bots, SEO tools, AI and crypto products. Open to partnerships and co-founder roles.',
+  image = '/avatar.jpg',
+  type = 'website',
+  publishedDate,
+  canonicalURL,
+} = Astro.props;
+
+const siteURL = 'https://temaprint.com';
+const canonical = canonicalURL || new URL(Astro.url.pathname, siteURL).href;
+const ogImage = new URL(image, siteURL).href;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#050505" />
+    <meta name="author" content="t3ma" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="generator" content={Astro.generator} />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="t3ma" />
+    <meta property="og:locale" content="en_US" />
+    {publishedDate && <meta property="article:published_time" content={publishedDate} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:creator" content="@temaprint" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
     <title>{title}</title>
+
+    <!-- JSON-LD: WebSite -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "t3ma",
+      "url": siteURL,
+      "description": description,
+      "author": {
+        "@type": "Person",
+        "name": "t3ma",
+        "url": siteURL,
+        "image": new URL('/avatar.jpg', siteURL).href,
+        "jobTitle": "Indie Developer",
+        "sameAs": [
+          "https://github.com/temaprint",
+          "https://twitter.com/temaprint",
+          "https://www.linkedin.com/in/artem-kan-66a6a675/",
+          "https://t.me/t_3_m_a"
+        ]
+      }
+    })} />
   </head>
   <body>
-    <div class="container">
+    <main>
       <slot />
-    </div>
+    </main>
   </body>
 </html>
